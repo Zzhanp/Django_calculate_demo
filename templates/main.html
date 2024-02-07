@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>简单计算器</title>
+    <script>
+        function appendToExpression(value) {
+            document.getElementById('expression').value += value;
+        }
+
+        function clearExpression() {
+            document.getElementById('expression').value = '';
+        }
+
+        function calculate() {
+            var expression = document.getElementById('expression').value;
+
+            // 使用XMLHttpRequest发送POST请求
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/calculate", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    // 这里可以根据后端返回的response来处理结果展示
+                    clearExpression()
+                    appendToExpression(response.result)
+                    alert('计算结果: ' + response.result); // 假设返回的数据有result字段
+                }
+            };
+            xhr.send(JSON.stringify({expression: expression}));
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="expression" readonly /><br/>
+    <button onclick="appendToExpression('1')">1</button>
+    <button onclick="appendToExpression('2')">2</button>
+    <button onclick="appendToExpression('3')">3</button>
+    <button onclick="appendToExpression('4')">4</button>
+    <button onclick="appendToExpression('5')">5</button>
+    <button onclick="appendToExpression('6')">6</button>
+    <button onclick="appendToExpression('7')">7</button>
+    <button onclick="appendToExpression('8')">8</button>
+    <button onclick="appendToExpression('9')">9</button>
+    <button onclick="appendToExpression('0')">0</button><br/>
+    <button onclick="appendToExpression('+')">+</button>
+    <button onclick="appendToExpression('-')">-</button>
+    <button onclick="appendToExpression('*')">×</button>
+    <button onclick="appendToExpression('/')">÷</button>
+    <button onclick="appendToExpression('.')">.</button><br/>
+    <button onclick="calculate()">计算</button>
+    <button onclick="clearExpression()">清除</button>
+</body>
+</html>
