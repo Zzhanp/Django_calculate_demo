@@ -53,9 +53,3 @@ def multiply(expression):
     return eval(expression[0]) * eval(expression[1])
 def divide(expression):
     return eval(expression[0]) / eval(expression[1])
-
-# if __name__ == '__main__':
-#     a = "123+456"
-#     b = a.split("+")
-#     c = a.split()
-#     print(c)
