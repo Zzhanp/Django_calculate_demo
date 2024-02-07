@@ -1,0 +1,5 @@
+pip~=22.3.1
+attrs~=22.2.0
+Jinja2~=2.11.3
+setuptools~=65.5.1
+Django~=4.2.10
